@@ -1,0 +1,28 @@
+{
+  "name": "@elianvancutsem/mostvisitedpages",
+  "version": "0.0.1",
+  "description": "This package fetches and returns your most viewed pages based on Google Analytics",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElianVanCutsem/MostVisitedPages.git"
+  },
+  "keywords": [
+    "Google",
+    "Analytics"
+  ],
+  "author": "Elian Van Cutsem",
+  "license": "ISC",
+  "dependencies": {
+    "@google-analytics/data": "^2.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.3"
+  },
+  "files": ["lib/**/*"]
+}
