@@ -1,7 +1,8 @@
 {
   "name": "@elianvancutsem/mostvisitedpages",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This package fetches and returns your most viewed pages based on Google Analytics",
+  "private": "false",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -16,7 +17,11 @@
     "Google",
     "Analytics"
   ],
-  "author": "Elian Van Cutsem",
+  "author": { 
+    "name": "Elian Van Cutsem", 
+    "email": "hello@elian.codes", 
+    "url": "https://www.elian.codes"
+  },
   "license": "ISC",
   "dependencies": {
     "@google-analytics/data": "^2.7.0"
@@ -24,5 +29,8 @@
   "devDependencies": {
     "typescript": "^4.4.3"
   },
-  "files": ["lib/**/*"]
+  "files": ["lib/**/*"],
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  }
 }
