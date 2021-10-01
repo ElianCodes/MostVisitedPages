@@ -18,7 +18,7 @@ The MostVisitedPages constructor takes in two parameters: `credentials` and `pro
 
 Credentials has two variables; `client_email` and `private_key`. Both of these can be created by creating a JSON Service Account.
 
-Follow [the Official Google Analytics Data API documentation](<https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart-client-libraries>) for more information about this.
+Follow [the Official Google Analytics Data API documentation](<https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart-client-libraries>) for more information about how to do this.
 
 ### `propertyId`
 
@@ -39,11 +39,50 @@ const mostVisitedPages = new MostVisitedPages({client_email: testEmail, private_
 
 ## Functions
 
-### `getPages(limit: string): Promise<Page[]>`
+### `getPageViews(limit?: number)`
+
+Function that returns an array of the x most viewed pages in the last 90 days according to Google Analytics.
 
 This function returns an array of the `Page` type (which can be imported from `@elianvancutsem/mostvisitedpages`)
 
-The `limit` parameter provides a limit to the number of pages returned, will default to 10 if none is set.
+The `limit` parameter provides a limit to the number of pages returned, will default to `10` if none is set.
+
+### `getPageViewsSince(startDate: string, limit?: number)`
+
+Works like `getPageViews()` but with a required `startDate`.
+
+The `startDate` parameter can be a date like `2021-10-01` (YYYY-MM-DD) or can be a sring like `NdaysAgo` or `yesterday`. It will **default to the past 90 days if none is provided**.
+
+### `getAllPageViewsSince(startDate: string)`
+
+Works like `getPageViewsSince()` but without a limit on pages.
+
+## Types
+
+types can be imported from `@elianvancutsem/mostvisitedpages` like the following:
+
+```js
+import { Page } from '@elianvancutsem/mostvisitedpages';
+```
+
+### Page
+
+```js
+{
+    title: string
+    url: string
+    views: number
+}
+```
+
+### Credentials
+
+```js
+{
+    client_email: string
+    private_key: string
+}
+```
 
 ## Full Example
 
@@ -56,7 +95,7 @@ const testKey = "xxx"
 const mostVisitedPages = new MostVisitedPages({client_email: testEmail, private_key: testKey}, 'xxxxxxxx')
 
 const getReport = async () => {
-    console.log(await mostVisitedPages.getPages(4));
+    console.log(await mostVisitedPages.getPageViewsSince('yesterday', 4));
 }
 
 getReport();

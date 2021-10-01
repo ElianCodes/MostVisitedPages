@@ -1,5 +1,5 @@
 export interface Page {
-    name: string
-    link: string
+    title: string
+    url: string
     views: number
 }

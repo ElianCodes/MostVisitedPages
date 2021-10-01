@@ -13,23 +13,35 @@ export class MostVisitedPages {
         this.propertyId = propertyId;
     }
 
-    async getPages(limit?: number): Promise<Page[]> {
+    private async runReport(startDate: string, limit?: number): Promise<Page[]> {
         const response: Page[] = [];
         const [report] = await this.analytics.runReport({
             property: `properties/${this.propertyId}`,
-            dateRanges: [{ startDate: '90daysAgo', endDate: 'today' }],
+            dateRanges: [{ startDate: startDate, endDate: 'today' }],
             dimensions: [{ name: 'fullPageUrl' }, { name: 'pageTitle' }],
             metrics: [{ name: 'engagedSessions' }],
-            limit: limit ?? 10
+            limit: limit ?? null
         });
         report.rows?.forEach((row: any) => {
             const record: Page = {
-                name: row.dimensionValues[1].value,
-                link: row.dimensionValues[0].value,
+                title: row.dimensionValues[1].value,
+                url: row.dimensionValues[0].value,
                 views: Number.parseInt(row.metricValues[0].value)
             }
             response.push(record)
         });
         return response
+    }
+
+    public async getPageViews(limit?: number): Promise<Page[]>{
+        return await this.runReport('90daysAgo', limit ?? 10)
+    }
+
+    public async getPageViewsSince(startDate: string, limit?: number): Promise<Page[]>{
+        return await this.runReport(startDate, limit ?? 10)
+    }
+
+    public async getAllPageViewsSince(startDate: string): Promise<Page[]> {
+        return await this.runReport(startDate)
     }
 }

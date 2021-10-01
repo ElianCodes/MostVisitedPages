@@ -1,6 +1,6 @@
 {
   "name": "@elianvancutsem/mostvisitedpages",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "This package fetches and returns your most viewed pages based on Google Analytics",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,8 +32,5 @@
   "devDependencies": {
     "typescript": "^4.4.3"
   },
-  "files": ["dist/**/*"],
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  }
+  "files": ["dist/**/*"]
 }
