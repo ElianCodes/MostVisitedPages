@@ -2,6 +2,8 @@ import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import { Page } from './interfaces/Page'
 import { Credentials } from './interfaces/Credentials'
 
+export { Page, Credentials }
+
 export class MostVisitedPages {
     analytics: BetaAnalyticsDataClient;
     propertyId: string;
@@ -11,14 +13,14 @@ export class MostVisitedPages {
         this.propertyId = propertyId;
     }
 
-    async fetch(limit: number): Promise<Page[]> {
+    async getPages(limit?: number): Promise<Page[]> {
         const response: Page[] = [];
         const [report] = await this.analytics.runReport({
             property: `properties/${this.propertyId}`,
             dateRanges: [{ startDate: '90daysAgo', endDate: 'today' }],
             dimensions: [{ name: 'fullPageUrl' }, { name: 'pageTitle' }],
             metrics: [{ name: 'engagedSessions' }],
-            limit: limit
+            limit: limit ?? 10
         });
         report.rows?.forEach((row: any) => {
             const record: Page = {
