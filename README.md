@@ -57,6 +57,14 @@ The `startDate` parameter can be a date like `2021-10-01` (YYYY-MM-DD) or can be
 
 Works like `getPageViewsSince()` but without a limit on pages.
 
+### `getActiveUsers(limit?: number)`
+
+works like `getPageViews()`, but returns the active users instead of the views.
+
+### `getActiveUsersSince(startDate: string, limit?: number)`
+
+works like `getPageViewsSince()`, but returns the active users instead of the views.
+
 ## Types
 
 types can be imported from `@elianvancutsem/mostvisitedpages` like the following:
@@ -67,17 +75,18 @@ import { Page } from '@elianvancutsem/mostvisitedpages';
 
 ### Page
 
-```js
+```ts
 {
     title: string
     url: string
-    views: number
+    views?: number
+    users?: number
 }
 ```
 
 ### Credentials
 
-```js
+```ts
 {
     client_email: string
     private_key: string

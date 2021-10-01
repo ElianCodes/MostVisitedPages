@@ -1,5 +1,6 @@
 export interface Page {
     title: string
     url: string
-    views: number
+    views?: number
+    users?: number
 }
