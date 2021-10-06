@@ -1,12 +1,16 @@
 {
   "name": "@elianvancutsem/mostvisitedpages",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "This package fetches and returns your most viewed pages based on Google Analytics",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "commonjs",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "package-check",
     "build": "tsc",
     "publish": "npm run build && npm publish --access public"
   },
@@ -21,9 +25,9 @@
     "Google",
     "Analytics"
   ],
-  "author": { 
-    "name": "Elian Van Cutsem", 
-    "email": "hello@elian.codes", 
+  "author": {
+    "name": "Elian Van Cutsem",
+    "email": "hello@elian.codes",
     "url": "https://www.elian.codes"
   },
   "license": "ISC",
@@ -31,7 +35,10 @@
     "@google-analytics/data": "^2.7.0"
   },
   "devDependencies": {
+    "@skypack/package-check": "^0.2.2",
     "typescript": "^4.4.3"
   },
-  "files": ["dist/**/*"]
+  "files": [
+    "dist/**/*"
+  ]
 }
