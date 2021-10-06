@@ -12,7 +12,7 @@ npm i @elianvancutsem/mostvisitedpages
 
 ## Using `@elianvancutsem/mostvisitedpages`
 
-The MostVisitedPages constructor takes in two parameters: `credentials` and `propertyId`.
+The MostVisitedPages constructor takes in two required parameters: `credentials` & `propertyId` and one possible undefined parameter `options`.
 
 ### `credentials`
 
@@ -26,6 +26,11 @@ The PropertyId is the PropertyID of the Google analytics property.
 
 NOTE: the Service account should be added with `read & analyze` access to the property.
 
+### `options`
+
+The options parameter will be used for more configuration options in the future, but is only used right now to exclude certain url's from the return array.
+The only downside to this is that if you set a limit on your request and `x` number of url's are exluded, the result will return `x`results less instead of your set `limit`
+
 ### Example
 
 ```js
@@ -33,8 +38,11 @@ import { MostVisitedPages } from "@elianvancutsem/mostvisitedpages";
 
 const testEmail = "xxx"
 const testKey = "xxx"
+const options = {
+    exludeUrls = ['www.elian.codes/']
+}
 
-const mostVisitedPages = new MostVisitedPages({client_email: testEmail, private_key: testKey}, 'xxxxxxxx')
+const mostVisitedPages = new MostVisitedPages({client_email: testEmail, private_key: testKey}, 'xxxxxxxx', options)
 ```
 
 ## Functions
@@ -71,6 +79,14 @@ types can be imported from `@elianvancutsem/mostvisitedpages` like the following
 
 ```js
 import { Page } from '@elianvancutsem/mostvisitedpages';
+```
+
+### Options
+
+```ts
+{
+    excludeUrls?: string[]
+}
 ```
 
 ### Page
