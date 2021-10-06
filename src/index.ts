@@ -1,8 +1,9 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import { Page } from './interfaces/Page'
 import { Credentials } from './interfaces/Credentials'
+import { Options } from './interfaces/Options';
 
-export { Page, Credentials }
+export { Page, Credentials, Options }
 
 interface Metric {
     name: string
@@ -11,14 +12,16 @@ interface Metric {
 export class MostVisitedPages {
     analytics: BetaAnalyticsDataClient;
     propertyId: string;
+    options?: Options;
 
-    constructor(credentials: Credentials, propertyId: string) {
+    constructor(credentials: Credentials, propertyId: string, options?: Options) {
         this.analytics = new BetaAnalyticsDataClient({credentials: credentials});
         this.propertyId = propertyId;
+        this.options = options;
     }
 
     private async runReport(metrics: Metric[], startDate: string, limit?: number): Promise<Page[]> {
-        const response: Page[] = [];
+        let response: Page[] = [];
         const [report] = await this.analytics.runReport({
             property: `properties/${this.propertyId}`,
             dateRanges: [{ startDate: startDate, endDate: 'today' }],
@@ -30,6 +33,9 @@ export class MostVisitedPages {
             const record: Page = this.determinePageResult(metrics, row);
             response.push(record)
         });
+        if (this.options?.excludeUrls != null) {
+            response = response.filter((page: Page) => !this.options?.excludeUrls?.includes(page.url))
+        }
         return response
     }
 
