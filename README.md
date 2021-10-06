@@ -109,6 +109,25 @@ import { Page } from '@elianvancutsem/mostvisitedpages';
 }
 ```
 
+## CommonJS Support
+
+To use this package with CommonJS, use `require(@elianvancutsem/mostvisitedpages)` instead of `import`. Below is an example
+
+```js
+const mvp = require("@elianvancutsem/mostvisitedpages");
+
+const testEmail = "xxx"
+const testKey = "xxx"
+
+const mostVisitedPages = new mvp.MostVisitedPages({client_email: testEmail, private_key: testKey}, 'xxxxxxxx')
+
+const getReport = async () => {
+    console.log(await mostVisitedPages.getPageViewsSince('yesterday', 4));
+}
+
+getReport();
+```
+
 ## Full Example
 
 ```js
