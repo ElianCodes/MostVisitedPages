@@ -10,6 +10,12 @@ Both TypeScript and ESModules are supported
 npm i @elianvancutsem/mostvisitedpages
 ```
 
+or use a CDN like Skypack
+
+```js
+import { MostVisitedPages } from "https://cdn.skypack.dev/@elianvancutsem/mostvisitedpages@0.0.8";
+```
+
 ## Using `@elianvancutsem/mostvisitedpages`
 
 The MostVisitedPages constructor takes in two required parameters: `credentials` & `propertyId` and one possible undefined parameter `options`.
