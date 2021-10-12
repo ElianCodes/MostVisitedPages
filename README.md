@@ -142,7 +142,7 @@ import { MostVisitedPages } from "@elianvancutsem/mostvisitedpages";
 const testEmail = "xxx"
 const testKey = "xxx"
 
-const mostVisitedPages = new MostVisitedPages({client_email: testEmail, private_key: testKey}, 'xxxxxxxx')
+const mostVisitedPages = new MostVisitedPages({client_email: testEmail, private_key: testKey}, 'xxxxxxxx', { excludeUrls: ['www.elian.codes/']})
 
 const getReport = async () => {
     console.log(await mostVisitedPages.getPageViewsSince('yesterday', 4));
