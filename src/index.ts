@@ -21,13 +21,14 @@ export class MostVisitedPages {
     }
 
     private async runReport(metrics: Metric[], startDate: string, limit?: number): Promise<Page[]> {
-        let response: Page[] = [];
+        let response: Page[] = []
+        const calculatedLimit = (this.options?.excludeUrls?.length ?? 0) + (limit ?? 10)
         const [report] = await this.analytics.runReport({
             property: `properties/${this.propertyId}`,
             dateRanges: [{ startDate: startDate, endDate: 'today' }],
             dimensions: [{ name: 'fullPageUrl' }, { name: 'pageTitle' }],
             metrics: metrics,
-            limit: limit ?? null
+            limit: calculatedLimit
         });
         report.rows?.forEach((row: any) => {
             const record: Page = this.determinePageResult(metrics, row);
@@ -35,6 +36,7 @@ export class MostVisitedPages {
         });
         if (this.options?.excludeUrls != null) {
             response = response.filter((page: Page) => !this.options?.excludeUrls?.includes(page.url))
+            response = response.slice(0, limit ?? 10)
         }
         return response
     }
